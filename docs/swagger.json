@@ -1,0 +1,78 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Migrated customer APIs from .NET to Golang",
+        "title": "Go Customer API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:9010",
+    "basePath": "/",
+    "paths": {
+        "/ping": {
+            "get": {
+                "description": "do ping",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ping"
+                ],
+                "summary": "ping api",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.ResStruct"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/dtos.Res500Struct"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "dtos.Res500Struct": {
+            "type": "object",
+            "properties": {
+                "httpCode": {
+                    "type": "integer",
+                    "example": 500
+                },
+                "message": {
+                    "type": "string",
+                    "example": "could not connect to db"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "FAILED"
+                }
+            }
+        },
+        "dtos.ResStruct": {
+            "type": "object",
+            "properties": {
+                "httpCode": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "message": {
+                    "type": "string",
+                    "example": "pong"
+                },
+                "status": {
+                    "type": "string",
+                    "example": "SUCCESS"
+                }
+            }
+        }
+    }
+}

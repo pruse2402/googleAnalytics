@@ -1,0 +1,53 @@
+basePath: /
+definitions:
+  dtos.Res500Struct:
+    properties:
+      httpCode:
+        example: 500
+        type: integer
+      message:
+        example: could not connect to db
+        type: string
+      status:
+        example: FAILED
+        type: string
+    type: object
+  dtos.ResStruct:
+    properties:
+      httpCode:
+        example: 200
+        type: integer
+      message:
+        example: pong
+        type: string
+      status:
+        example: SUCCESS
+        type: string
+    type: object
+host: localhost:9010
+info:
+  contact: {}
+  description: Migrated customer APIs from .NET to Golang
+  title: Go Customer API
+  version: "1.0"
+paths:
+  /ping:
+    get:
+      consumes:
+      - application/json
+      description: do ping
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dtos.ResStruct'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dtos.Res500Struct'
+      summary: ping api
+      tags:
+      - ping
+swagger: "2.0"

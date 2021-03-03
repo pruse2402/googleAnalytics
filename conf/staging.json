@@ -1,0 +1,21 @@
+{
+    "app_version"                 : "1.0.0(0)",
+    "port"                        : 9010,
+    "prod_mode"                   : false,
+    "stag_mode"                   : true,
+    "dev_mode"                    : false,
+    "app_name"                    : "Alco Change Dtx",
+  
+    "delims_l"                    : "${",
+    "delims_r"                    : "}",
+  
+    "http_address"                : "",
+  
+    "db_name"                     : "cyberliver_platform",
+    "username"                    : "alcochange",
+    "password"                    : "alco$2021$cha01ge",
+    "uri"                         : null,
+    "db_address"                  : "alcochange.cgdbfirlicf1.eu-west-2.rds.amazonaws.com:5432",
+    "max_connection_pool_size"    : 100
+  }
+  
