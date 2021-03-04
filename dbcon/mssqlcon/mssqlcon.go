@@ -120,11 +120,15 @@ func MSSqlInit(url string) {
 				return
 			}
 			lg.Println("Connected to database successfully!")
+			CreateTable(ConnPool)
+
 		})
 	}
 }
 
-//ConnPool.Close()
+func CreateTable(db *sql.DB) {
+	AboutPrivacyTableCreation(db)
+}
 
 func MSSqlConnClose() {
 	if ConnPool != nil {
@@ -132,24 +136,40 @@ func MSSqlConnClose() {
 	}
 }
 
-// func Init(url string) {
-// 	if ConnPool == nil {
-// 		once.Do(func() {
-// 			var err error
-// 			// Create connection pool
-// 			ConnPool, err = sql.Open("sqlserver", url)
-// 			if err != nil {
-// 				globals.Logger.Fatalf("Error creating connection pool: %+v", err)
-// 			}
+func AboutPrivacyTableCreation(db *sql.DB) {
+	aboutPrivacyTable, err := db.Prepare(`CREATE TABLE IF NOT EXISTS 
+		ac_about_privacy_policy (about_privacy_policy_id int unsigned NOT NULL AUTO_INCREMENT, 
+		version_code int unsigned NOT NULL, 
+		version_name varchar(255) NOT NULL,
+		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+		updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP,
+		PRIMARY KEY (about_privacy_policy_id));`)
+	if err != nil {
+		lg.Println(err.Error())
+	}
+	_, err = aboutPrivacyTable.Exec()
+	if err != nil {
+		lg.Println(err.Error())
+	}
+	aboutPrivacyInfoTable, errN := db.Prepare(`CREATE TABLE IF NOT EXISTS 
+		ac_about_privacy_policy_info (id int unsigned NOT NULL AUTO_INCREMENT, 
+	    about_privacy_policy_id int unsigned NOT NULL,  
+		CONSTRAINT fk_ac_about_privacy_policy FOREIGN KEY (about_privacy_policy_id) REFERENCES ac_about_privacy_policy(about_privacy_policy_id),
+		version_code int unsigned NOT NULL, 
+		version_name varchar(255) NOT NULL,
+		sequence_no int unsigned NOT NULL, 
+		content_type varchar(1000) NOT NULL,
+		message_info BLOB,
+		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+		updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP,
+		PRIMARY KEY (id));`)
 
-// 			ConnPool.SetMaxOpenConns(config.MAX_DB_CONNECTIONS)
-// 			ctx := context.Background()
-// 			err = ConnPool.PingContext(ctx)
-// 			if err != nil {
-// 				globals.Logger.Errorf("Unable to ping to DB. Err: %+v", err)
-// 				return
-// 			}
-// 			globals.Logger.Infof("Connected to database successfully!")
-// 		})
-// 	}
-// }
+	if errN != nil {
+		lg.Println(errN.Error())
+	}
+	_, err = aboutPrivacyInfoTable.Exec()
+	if err != nil {
+		lg.Println(err.Error())
+	}
+
+}
