@@ -143,6 +143,7 @@ func AboutPrivacyTableCreation(db *sql.DB) {
 		version_name varchar(255) NOT NULL,
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 		updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP,
+		CONSTRAINT versionx_about_privacy_policy UNIQUE (version_code),
 		PRIMARY KEY (about_privacy_policy_id));`)
 	if err != nil {
 		lg.Println(err.Error())
@@ -162,8 +163,8 @@ func AboutPrivacyTableCreation(db *sql.DB) {
 		message_info BLOB,
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 		updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP,
+		CONSTRAINT versionx_about_privacy_policy_info UNIQUE (version_code,about_privacy_policy_id,sequence_no),
 		PRIMARY KEY (id));`)
-
 	if errN != nil {
 		lg.Println(errN.Error())
 	}
@@ -171,5 +172,14 @@ func AboutPrivacyTableCreation(db *sql.DB) {
 	if err != nil {
 		lg.Println(err.Error())
 	}
+
+	//queryUniquePrivacy := fmt.Sprintf(`CREATE UNIQUE INDEX IF NOT EXISTS versionx_about_privacy_policy ON %s (version_code,version_name)`, `ac_about_privacy_policy`)
+	// queryUniquePrivacy := fmt.Sprintf(`ALTER TABLE ac_about_privacy_policy ADD CONSTRAINT versionx_about_privacy_policy UNIQUE (version_code)`)
+	// lg.Println("queryUniquePrivacy-", queryUniquePrivacy)
+	// queryUnique, errN := db.Prepare(queryUniquePrivacy)
+	// _, errU := queryUnique.Exec()
+	// if errU != nil {
+	// 	lg.Println(errU.Error())
+	// }
 
 }
