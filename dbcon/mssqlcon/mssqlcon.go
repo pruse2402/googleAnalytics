@@ -7,8 +7,8 @@ import (
 	"sync"
 
 	"github.com/FenixAra/go-util/log"
-	//_ "github.com/go-sql-driver/mysql"
-	_ "github.com/hgfischer/mysql"
+	_ "github.com/go-sql-driver/mysql"
+	//_ "github.com/hgfischer/mysql"
 )
 
 //Pool of database connection

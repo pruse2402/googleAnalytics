@@ -6,6 +6,7 @@ require (
 	github.com/FenixAra/go-util v0.0.0-20191206092236-3fbbd91286b1
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
 	github.com/go-pg/pg v8.0.7+incompatible
+	github.com/go-sql-driver/mysql v1.5.0
 	github.com/golang/protobuf v1.3.1 // indirect
 	github.com/google/uuid v1.2.0 // indirect
 	github.com/hgfischer/mysql v0.0.0-20130225215946-a48f79b55b5a
