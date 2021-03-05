@@ -191,7 +191,7 @@ func BehaviourChangeTechniquesTableCreation(db *sql.DB) {
 	}
 	_, err = ac_bct.Exec()
 	if err != nil {
-		lg.Println(err.Error())
+		lg.Println("Error -", err.Error())
 	}
 
 }
