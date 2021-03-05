@@ -7,11 +7,9 @@ import (
 	"cyberliver/go-alcochange-dtx/internals/daos"
 
 	"github.com/FenixAra/go-util/log"
-	"github.com/go-pg/pg"
 )
 
 type Ping struct {
-	dbConn      *pg.DB
 	l           *log.Logger
 	ping        *daos.Ping
 	dbConnMSSQL *mssqlcon.DBConn

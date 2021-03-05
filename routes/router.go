@@ -48,6 +48,7 @@ func RouterConfig() http.Handler {
 	//indexHandlers := alice.New(recoverHandler)
 
 	setPingRoutes(router)
+	GetAboutPrivacyPolicy(router)
 
 	router.Handler("GET", "/swagger", httpSwagger.WrapHandler)
 	router.Handler("GET", "/swagger/:one", httpSwagger.WrapHandler)
