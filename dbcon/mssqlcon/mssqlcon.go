@@ -128,6 +128,8 @@ func MSSqlInit(url string) {
 
 func CreateTable(db *sql.DB) {
 	AboutPrivacyTableCreation(db)
+	BehaviourChangeTechniquesTableCreation(db) //behaviour_change_techniques
+
 }
 
 func MSSqlConnClose() {
@@ -172,14 +174,24 @@ func AboutPrivacyTableCreation(db *sql.DB) {
 	if err != nil {
 		lg.Println(err.Error())
 	}
+}
 
-	//queryUniquePrivacy := fmt.Sprintf(`CREATE UNIQUE INDEX IF NOT EXISTS versionx_about_privacy_policy ON %s (version_code,version_name)`, `ac_about_privacy_policy`)
-	// queryUniquePrivacy := fmt.Sprintf(`ALTER TABLE ac_about_privacy_policy ADD CONSTRAINT versionx_about_privacy_policy UNIQUE (version_code)`)
-	// lg.Println("queryUniquePrivacy-", queryUniquePrivacy)
-	// queryUnique, errN := db.Prepare(queryUniquePrivacy)
-	// _, errU := queryUnique.Exec()
-	// if errU != nil {
-	// 	lg.Println(errU.Error())
-	// }
+func BehaviourChangeTechniquesTableCreation(db *sql.DB) {
+	ac_bct, err := db.Prepare(`CREATE TABLE IF NOT EXISTS ac_behaviour_change_techniques (behaviour_change_id int unsigned NOT NULL AUTO_INCREMENT, 
+		bct_taxonomy_id varchar(100) NOT NULL, 
+		bct_taxonomy varchar(255) NOT NULL,
+		bct_id varchar(100) NOT NULL,
+		bct_description varchar(1000) NOT NULL,
+		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+		updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP,
+		CONSTRAINT bct_idx_behaviour_change UNIQUE (bct_id),
+		PRIMARY KEY (behaviour_change_id));`)
+	if err != nil {
+		lg.Println(err.Error())
+	}
+	_, err = ac_bct.Exec()
+	if err != nil {
+		lg.Println(err.Error())
+	}
 
 }
