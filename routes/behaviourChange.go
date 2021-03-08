@@ -8,7 +8,7 @@ import (
 )
 
 func BehaviourChange(router *httprouter.Router) {
-	router.GET("/ac-behaviourChange", GetBehaviourChange)
+	router.GET("/ac-behaviour-change", GetBehaviourChange)
 }
 
 func GetBehaviourChange(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
