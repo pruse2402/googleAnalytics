@@ -121,7 +121,6 @@ func MSSqlInit(url string) {
 			}
 			lg.Println("Connected to database successfully!")
 			CreateTable(ConnPool)
-
 		})
 	}
 }
@@ -144,7 +143,7 @@ func AboutPrivacyTableCreation(db *sql.DB) {
 		version_code int unsigned NOT NULL, 
 		version_name varchar(255) NOT NULL,
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-		updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP,
+		updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 		CONSTRAINT versionx_about_privacy_policy UNIQUE (version_code),
 		PRIMARY KEY (about_privacy_policy_id));`)
 	if err != nil {
@@ -164,7 +163,7 @@ func AboutPrivacyTableCreation(db *sql.DB) {
 		content_type varchar(1000) NOT NULL,
 		message_info BLOB,
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-		updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP,
+		updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 		CONSTRAINT versionx_about_privacy_policy_info UNIQUE (version_code,about_privacy_policy_id,sequence_no),
 		PRIMARY KEY (id));`)
 	if errN != nil {
@@ -183,7 +182,7 @@ func BehaviourChangeTechniquesTableCreation(db *sql.DB) {
 		bct_id varchar(100) NOT NULL,
 		bct_description varchar(1000) NOT NULL,
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-		updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP,
+		updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 		CONSTRAINT bct_idx_behaviour_change UNIQUE (bct_id),
 		PRIMARY KEY (behaviour_change_id));`)
 	if err != nil {

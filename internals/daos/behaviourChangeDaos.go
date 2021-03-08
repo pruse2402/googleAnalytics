@@ -21,26 +21,24 @@ func NewBehaviourChange(l *log.Logger, dbConnMSSQL *mssqlcon.DBConn) *BehaviourC
 }
 
 type BehaviourChangeDao interface {
-	GetBehaviourChangeList() (*[]dtos.ACBehaviourChangeResponse, error)
+	GetBehaviourChangeList() (*[]dtos.ACBehaviourChange, error)
 }
 
-func (bc *BehaviourChange) GetBehaviourChangeList() (*[]dtos.ACBehaviourChangeResponse, error) {
-	list := []dtos.ACBehaviourChangeResponse{}
-	rows, err := bc.dbConnMSSQL.GetQueryer().Query(fmt.Sprintf("SELECT behaviour_change_id,bct_taxonomy_id, bct_taxonomy, bct_id,bct_description, created_at, updated_at from ac_behaviour_change_techniques"))
+func (bc *BehaviourChange) GetBehaviourChangeList() (*[]dtos.ACBehaviourChange, error) {
+	list := []dtos.ACBehaviourChange{}
+	rows, err := bc.dbConnMSSQL.GetQueryer().Query(fmt.Sprintf("SELECT behaviour_change_id,bct_taxonomy_id, bct_taxonomy, bct_id,bct_description from ac_behaviour_change_techniques"))
 	if err != nil {
 		bc.l.Error("Error GetBehaviourChangeList ", err)
 		return nil, err
 	}
 	defer rows.Close()
 	for rows.Next() {
-		info := dtos.ACBehaviourChangeResponse{}
+		info := dtos.ACBehaviourChange{}
 		err := rows.Scan(&info.BehaviourChangeID,
 			&info.BctTaxonomyID,
 			&info.BctTaxonomy,
 			&info.BctID,
-			&info.BctDescription,
-			&info.CreatedAt,
-			&info.CreatedAt)
+			&info.BctDescription)
 		if err != nil {
 			bc.l.Error("Error GetBehaviourChangeList - ", err)
 			return nil, err

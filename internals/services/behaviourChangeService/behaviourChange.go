@@ -22,7 +22,9 @@ func New(l *log.Logger, dbConnMSSQL *mssqlcon.DBConn) *BehaviourChange {
 	}
 }
 
-func (bc *BehaviourChange) GetBehaviourChange() (*[]dtos.ACBehaviourChangeResponse, error) {
+func (bc *BehaviourChange) GetBehaviourChange() (*dtos.ACBehaviourChangeResponse, error) {
+
+	bct := dtos.ACBehaviourChangeResponse{}
 
 	behaviourChangeIns, errL := bc.behaviourChange.GetBehaviourChangeList()
 	if errL != nil {
@@ -30,5 +32,7 @@ func (bc *BehaviourChange) GetBehaviourChange() (*[]dtos.ACBehaviourChangeRespon
 		return nil, errL
 	}
 
-	return behaviourChangeIns, nil
+	bct.BehaviourChange = behaviourChangeIns
+
+	return &bct, nil
 }
