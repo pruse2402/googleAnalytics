@@ -127,8 +127,8 @@ func MSSqlInit(url string) {
 
 func CreateTable(db *sql.DB) {
 	AboutPrivacyTableCreation(db)
-	BehaviourChangeTechniquesTableCreation(db) //behaviour_change_techniques
-
+	BehaviourChangeTechniquesTableCreation(db)    //BCT
+	BehaviourChangeInterventionsTableCreation(db) //BCN
 }
 
 func MSSqlConnClose() {
@@ -185,6 +185,43 @@ func BehaviourChangeTechniquesTableCreation(db *sql.DB) {
 		updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 		CONSTRAINT bct_idx_behaviour_change UNIQUE (bct_id),
 		PRIMARY KEY (behaviour_change_id));`)
+	if err != nil {
+		lg.Println(err.Error())
+	}
+	_, err = ac_bct.Exec()
+	if err != nil {
+		lg.Println("Error -", err.Error())
+	}
+
+}
+
+func BehaviourChangeInterventionsTableCreation(db *sql.DB) {
+	ac_bct, err := db.Prepare(`CREATE TABLE IF NOT EXISTS ac_behaviour_change_notifications (behaviour_notification_id int unsigned NOT NULL AUTO_INCREMENT, 
+		bcn_category varchar(100) NOT NULL, 
+		bcn_category_desc varchar(255),
+		bcn_group varchar(100),
+		bcn_group_description varchar(255),
+		bcn_trigger_event varchar(255),
+		app_route varchar(255),
+		bcn_id varchar(100) NOT NULL,
+		bcn_message varchar(2555),
+		bct_1 varchar(100),
+		bct_2 varchar(100),
+		bct_3 varchar(100),
+		bct_4 varchar(100),
+		alcochange_theme BOOLEAN DEFAULT FALSE,
+		frames_feedback BOOLEAN DEFAULT FALSE,
+		frames_responsibility BOOLEAN DEFAULT FALSE,
+		frames_advice BOOLEAN DEFAULT FALSE,
+		frames_menu BOOLEAN DEFAULT FALSE,
+		frames_empathy BOOLEAN DEFAULT FALSE,
+		frames_support_and_selfefficacy BOOLEAN DEFAULT FALSE,
+		develop_discrepancy BOOLEAN DEFAULT FALSE,
+		assessment BOOLEAN DEFAULT FALSE,
+		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+		updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+		CONSTRAINT bcn_idx_behaviour_change UNIQUE (bcn_id),
+		PRIMARY KEY (behaviour_notification_id));`)
 	if err != nil {
 		lg.Println(err.Error())
 	}
