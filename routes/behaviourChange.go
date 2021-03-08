@@ -16,7 +16,7 @@ func GetBehaviourChange(w http.ResponseWriter, r *http.Request, _ httprouter.Par
 	p := behaviourChangeService.New(rd.l, rd.dbConnMSSQL)
 	res, err := p.GetBehaviourChange()
 	if err != nil {
-		writeJSONMessage(err.Error(), ERR_MSG, http.StatusInternalServerError, rd)
+		writeJSONMessage(err.Error(), ERR_MSG, http.StatusBadRequest, rd)
 		return
 	}
 	writeJSONStruct(res, http.StatusOK, rd)

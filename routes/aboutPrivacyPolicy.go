@@ -17,7 +17,7 @@ func AboutPrivacyPolicy(w http.ResponseWriter, r *http.Request, _ httprouter.Par
 	p := aboutPrivacyPolicy.New(rd.l, rd.dbConnMSSQL)
 	res, err := p.AboutPrivacyPolicy()
 	if err != nil {
-		writeJSONMessage(err.Error(), ERR_MSG, http.StatusInternalServerError, rd)
+		writeJSONMessage(err.Error(), ERR_MSG, http.StatusBadRequest, rd)
 		return
 	}
 	writeJSONStruct(res, http.StatusOK, rd)
