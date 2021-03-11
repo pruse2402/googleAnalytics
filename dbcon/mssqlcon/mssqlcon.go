@@ -129,6 +129,8 @@ func CreateTable(db *sql.DB) {
 	AboutPrivacyTableCreation(db)
 	BehaviourChangeTechniquesTableCreation(db)    //BCT
 	BehaviourChangeInterventionsTableCreation(db) //BCN
+	PatientEngagementReminderTableCreation(db)
+
 }
 
 func MSSqlConnClose() {
@@ -228,6 +230,46 @@ func BehaviourChangeInterventionsTableCreation(db *sql.DB) {
 	_, err = ac_bct.Exec()
 	if err != nil {
 		lg.Println("Error -", err.Error())
+	}
+
+}
+
+func PatientEngagementReminderTableCreation(db *sql.DB) {
+	acIt, err := db.Prepare(`CREATE TABLE IF NOT EXISTS ac_intervention_type (id int unsigned NOT NULL AUTO_INCREMENT,
+		intervention_type_id int unsigned NOT NULL UNIQUE,
+		intervention_type varchar(255) NOT NULL,
+		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+		updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+		PRIMARY KEY (id, intervention_type_id));`)
+	if err != nil {
+		lg.Println(err.Error())
+	}
+	_, err = acIt.Exec()
+	if err != nil {
+		lg.Println("Error -", err.Error())
+	}
+
+	patientEngagementReminderTable, errN := db.Prepare(`CREATE TABLE IF NOT EXISTS
+		ac_patient_engagement_reminder (id int unsigned NOT NULL AUTO_INCREMENT,
+		user_id bigint unsigned NOT NULL,
+		CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES user(user_id),
+		user_uuid varchar(100) NOT NULL,
+	    intervention_type_id int unsigned NOT NULL,
+		CONSTRAINT fk_ac_intervention_type FOREIGN KEY (intervention_type_id) REFERENCES ac_intervention_type(intervention_type_id),
+		notification_id int unsigned NOT NULL,
+		patient_engagement_time varchar(100) NOT NULL,
+		message_shown varchar(1000),
+		user_action varchar(100) NOT NULL,
+		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+		updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+		CONSTRAINT reminderx_patient_engagement UNIQUE (notification_id,patient_engagement_time),
+		PRIMARY KEY (id));`)
+	if errN != nil {
+		lg.Println(errN.Error())
+	}
+	_, err = patientEngagementReminderTable.Exec()
+	if err != nil {
+		lg.Println(err.Error())
 	}
 
 }

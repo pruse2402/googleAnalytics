@@ -51,6 +51,7 @@ func RouterConfig() http.Handler {
 	GetAboutPrivacyPolicy(router)
 	BehaviourChange(router)
 	BehaviourChangeNotification(router)
+	PatientEngagementReminder(router)
 
 	router.Handler("GET", "/swagger", httpSwagger.WrapHandler)
 	router.Handler("GET", "/swagger/:one", httpSwagger.WrapHandler)
