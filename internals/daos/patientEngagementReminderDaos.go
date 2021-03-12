@@ -27,9 +27,8 @@ type PatientEngagementReminderDao interface {
 
 func (per *PatientEngagementReminder) InsertScheduledPatientEngagementReminder(req dtos.ScheduledIntervention, userUuid string, userID int64) error {
 
-	query := fmt.Sprintf(`INSERT INTO ac_patient_engagement_reminder(user_id, user_uuid, intervention_type_id, notification_id, patient_engagement_time, message_shown, user_action) values(%d, %s, %d, %d, %v, %s, %s)`, userID, userUuid, req.InterventionTypeID, req.NotificationID, req.PatientEngagementTime, req.MessageShown, req.UserAction)
+	query := fmt.Sprintf(`INSERT INTO ac_patient_engagement_reminder(user_id, user_uuid, intervention_type_id, notification_id, patient_engagement_time, message_shown, user_action) values('%v', '%v', '%v', '%v', '%v', '%v', '%v')`, userID, userUuid, req.InterventionTypeID, req.NotificationID, req.PatientEngagementTime, req.MessageShown, req.UserAction)
 	_, err := per.dbConnMSSQL.GetQueryer().Exec(query)
-
 	if err != nil {
 		return err
 	}
@@ -39,7 +38,7 @@ func (per *PatientEngagementReminder) InsertScheduledPatientEngagementReminder(r
 
 func (per *PatientEngagementReminder) InsertEngagedPatientEngagementReminder(req dtos.EngagedIntervention, userUuid string, userID int64) error {
 
-	query := fmt.Sprintf(`INSERT INTO ac_patient_engagement_reminder(user_id, user_uuid, intervention_type_id, notification_id, patient_engagement_time, message_shown, user_action) values(%d, %s, %d, %d, %v, %s, %s)`, userID, userUuid, req.InterventionTypeID, req.NotificationID, req.PatientEngagementTime, req.MessageShown, req.UserAction)
+	query := fmt.Sprintf(`INSERT INTO ac_patient_engagement_reminder(user_id, user_uuid, intervention_type_id, notification_id, patient_engagement_time, message_shown, user_action) values('%v', '%v', '%v', '%v', '%v', '%v', '%v')`, userID, userUuid, req.InterventionTypeID, req.NotificationID, req.PatientEngagementTime, req.MessageShown, req.UserAction)
 
 	_, err := per.dbConnMSSQL.GetQueryer().Exec(query)
 

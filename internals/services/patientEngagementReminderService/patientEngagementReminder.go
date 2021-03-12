@@ -4,7 +4,6 @@ import (
 	"cyberliver/go-alcochange-dtx/dbcon/mssqlcon"
 	"cyberliver/go-alcochange-dtx/dtos"
 	"cyberliver/go-alcochange-dtx/internals/daos"
-	"fmt"
 
 	"github.com/FenixAra/go-util/log"
 )
@@ -28,7 +27,6 @@ func (per *PatientEngagementReminder) InsertPatientEngagementReminder(patientEng
 	if patientEngagementReminder.ScheduledIntervention != nil {
 		for _, scheduledInterventions := range patientEngagementReminder.ScheduledIntervention {
 			scheduledInterventions.UserAction = "Scheduled"
-			fmt.Println("scjed : ", scheduledInterventions)
 			errL := per.patientEngagementReminder.InsertScheduledPatientEngagementReminder(scheduledInterventions, patientEngagementReminder.UserUuid, patientEngagementReminder.UserID)
 			if errL != nil {
 				per.l.Error("InsertPatientEngagementReminder Error - ", errL)
