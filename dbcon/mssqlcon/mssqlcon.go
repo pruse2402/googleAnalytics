@@ -130,6 +130,7 @@ func CreateTable(db *sql.DB) {
 	BehaviourChangeTechniquesTableCreation(db)    //BCT
 	BehaviourChangeInterventionsTableCreation(db) //BCN
 	PatientEngagementReminderTableCreation(db)
+	BenefitTherapy(db)
 
 }
 
@@ -272,4 +273,20 @@ func PatientEngagementReminderTableCreation(db *sql.DB) {
 		lg.Println(err.Error())
 	}
 
+}
+
+func BenefitTherapy(db *sql.DB) {
+
+	ac_bt, err := db.Prepare(`CREATE TABLE IF NOT EXISTS ac_benefit_therapy (id int unsigned NOT NULL AUTO_INCREMENT, 
+		message varchar(255) NOT NULL,
+		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+		updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+		PRIMARY KEY (id));`)
+	if err != nil {
+		lg.Println(err.Error())
+	}
+	_, err = ac_bt.Exec()
+	if err != nil {
+		lg.Println("Error -", err.Error())
+	}
 }

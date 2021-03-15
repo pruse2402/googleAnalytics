@@ -52,6 +52,7 @@ func RouterConfig() http.Handler {
 	BehaviourChange(router)
 	BehaviourChangeNotification(router)
 	PatientEngagementReminder(router)
+	BenefitTherapy(router)
 
 	router.Handler("GET", "/swagger", httpSwagger.WrapHandler)
 	router.Handler("GET", "/swagger/:one", httpSwagger.WrapHandler)
