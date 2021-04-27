@@ -2,9 +2,8 @@ package ping
 
 import (
 	"errors"
-
-	"cyberliver/go-alcochange-dtx/dbcon/mssqlcon"
-	"cyberliver/go-alcochange-dtx/internals/daos"
+	"go-alcochange-dtx-ga-ga/go-alcochange-dtx-ga/dbcon/mssqlcon"
+	"go-alcochange-dtx-ga-ga/go-alcochange-dtx-ga/internals/daos"
 
 	"github.com/FenixAra/go-util/log"
 )

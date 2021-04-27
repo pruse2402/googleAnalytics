@@ -1,7 +1,7 @@
 package daos
 
 import (
-	"cyberliver/go-alcochange-dtx/dbcon/mssqlcon"
+	"go-alcochange-dtx-ga-ga/go-alcochange-dtx-ga/dbcon/mssqlcon"
 
 	"github.com/FenixAra/go-util/log"
 )

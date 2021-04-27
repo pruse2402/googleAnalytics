@@ -32,6 +32,9 @@ type Config struct {
 	DB_ADDRESS               string `json:"db_address"`
 	Max_Connection_Pool_Size int    `json:"max_connection_pool_size"`
 	MSSQL_URL                string `json:"mssql_db_url"`
+
+	// GOOGLE ANALYTICS
+	PROJECT_ID string `json:"project_id"`
 }
 
 var (

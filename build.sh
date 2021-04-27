@@ -58,5 +58,5 @@ echo "Done."
 if [ $? == 0 ]; then
     echo "Done."
 	echo "## Starting service ##"
-    ./go-alcochange-dtx -conf conf/dev.json
+    ./go-alcochange-dtx-ga -conf conf/dev.json
 fi

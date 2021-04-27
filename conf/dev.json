@@ -1,22 +1,24 @@
 {
     "app_version"                 : "1.0.0(0)",
-    "port"                        : 9011,
+    "port"                        : 9095,
     "prod_mode"                   : false,
     "stag_mode"                   : false,
     "dev_mode"                    : true,
-    "app_name"                    : "Alco Change Dtx",
+    "app_name"                    : "Alco Change Dtx GA",
   
     "delims_l"                    : "${",
     "delims_r"                    : "}",
   
     "http_address"                : "",
   
-    "db_name"                     : "cyberliver_platform",
+    "db_name"                     : "cyberliver_platform_ga",
     "username"                    : "postgres",
     "password"                    : "postgres",
     "uri"                         : null,
     "db_address"                  : "localhost:5432",
     "max_connection_pool_size"    : 15,
-    "mssql_db_url"                : "root:cbAdmin2018@tcp(localhost:3306)/cyberliver_platform?charset=utf8"
+    "mssql_db_url"                : "root:cbAdmin2018@tcp(localhost:3306)/cyberliver_platform?charset=utf8",
+
+    "project_id"                  : "alcochange-dtx-dev"
   }
   

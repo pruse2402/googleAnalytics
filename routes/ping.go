@@ -1,10 +1,9 @@
 package routes
 
 import (
+	"go-alcochange-dtx-ga-ga/go-alcochange-dtx-ga/dtos"
+	"go-alcochange-dtx-ga-ga/go-alcochange-dtx-ga/internals/services/ping"
 	"net/http"
-
-	"cyberliver/go-alcochange-dtx/dtos"
-	"cyberliver/go-alcochange-dtx/internals/services/ping"
 
 	"github.com/julienschmidt/httprouter"
 )

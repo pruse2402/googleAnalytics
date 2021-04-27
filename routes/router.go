@@ -47,12 +47,7 @@ func RouterConfig() http.Handler {
 	router.PanicHandler = panicHandler
 	//indexHandlers := alice.New(recoverHandler)
 
-	setPingRoutes(router)
-	GetAboutPrivacyPolicy(router)
-	BehaviourChange(router)
-	BehaviourChangeNotification(router)
-	PatientEngagementReminder(router)
-	BenefitTherapy(router)
+	GoogleAnalytics(router)
 
 	router.Handler("GET", "/swagger", httpSwagger.WrapHandler)
 	router.Handler("GET", "/swagger/:one", httpSwagger.WrapHandler)
