@@ -19,8 +19,6 @@ func SaveGoogleAnalytics(w http.ResponseWriter, r *http.Request, _ httprouter.Pa
 
 	keys := r.URL.Query()
 	requestDate := keys.Get("date")
-	rd.l.Debug("googleAnalytics", "date", requestDate)
-
 	g := googleAnalyticsService.New(rd.l, rd.dbConnMSSQL)
 	res, err := g.InsertGoogleAnalytics(requestDate, ctx)
 	if err != nil {

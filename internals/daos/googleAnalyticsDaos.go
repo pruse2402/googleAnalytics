@@ -1,7 +1,6 @@
 package daos
 
 import (
-	"fmt"
 	"go-alcochange-dtx-ga-ga/go-alcochange-dtx-ga/dbcon/mssqlcon"
 	"go-alcochange-dtx-ga-ga/go-alcochange-dtx-ga/dtos"
 
@@ -41,7 +40,7 @@ func (ga *GoogleAnalytics) InsertGoogleAnalyticsData(googleAnalyticsIns *[]dtos.
 	// 	fmt.Println("------------------------------ : ", err)
 	// }
 
-	fmt.Println("--------- : ", googleAnalyticsIns)
+	//fmt.Println("--------- : ", googleAnalyticsIns)
 
 	return nil
 
