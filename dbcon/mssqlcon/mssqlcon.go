@@ -110,13 +110,13 @@ func MSSqlInit(url string) {
 			// Create connection pool
 			ConnPool, err = sql.Open("mysql", url)
 			if err != nil {
-				lg.Println("Error creating connection pool: %+v", err)
+				lg.Printf("Error creating connection pool: %+v \n", err)
 			}
 			ConnPool.SetMaxOpenConns(15)
 			ctx := context.Background()
 			err = ConnPool.PingContext(ctx)
 			if err != nil {
-				lg.Println("Unable to ping to DB. Err: %+v", err)
+				lg.Printf("Unable to ping to DB. Err: %+v \n", err)
 				return
 			}
 			lg.Println("Connected to database successfully!")
@@ -126,7 +126,7 @@ func MSSqlInit(url string) {
 }
 
 func CreateTable(db *sql.DB) {
-	// AboutPrivacyTableCreation(db)
+	GoogleAnalyticsTable(db)
 	// BehaviourChangeTechniquesTableCreation(db)    //BCT
 	// BehaviourChangeInterventionsTableCreation(db) //BCN
 	// PatientEngagementReminderTableCreation(db)
@@ -137,6 +137,43 @@ func CreateTable(db *sql.DB) {
 func MSSqlConnClose() {
 	if ConnPool != nil {
 		ConnPool.Close()
+	}
+}
+
+func GoogleAnalyticsTable(db *sql.DB) {
+	googleAnalytics, err := db.Prepare(`CREATE TABLE IF NOT EXISTS
+ 		google_analytics (ga_id int unsigned NOT NULL AUTO_INCREMENT,
+		event_date varchar(100),
+		event_timestamp BIGINT,
+		event_name varchar(255),
+		event_params json,
+		event_previous_timestamp BIGINT,
+		event_value_in_usd float,
+		event_bundle_sequence_id BIGINT,
+		event_server_timestamp_offset BIGINT,
+		user_id varchar(450),
+		user_pseudo_id varchar(450),
+		user_properties json,
+		user_first_touch_timestamp BIGINT,
+		user_ltv json,
+		device json,
+		geo json,
+		app_info json,
+		traffic_source json,
+		stream_id varchar(255),
+		platform varchar(255),
+		event_dimensions json,
+		ecommerce json,
+		items json,
+ 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+ 		updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ 		PRIMARY KEY (ga_id));`)
+	if err != nil {
+		lg.Println(err.Error())
+	}
+	_, err = googleAnalytics.Exec()
+	if err != nil {
+		lg.Println(err.Error())
 	}
 }
 

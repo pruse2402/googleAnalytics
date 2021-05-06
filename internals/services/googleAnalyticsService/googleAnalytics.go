@@ -2,6 +2,7 @@ package googleAnalyticsService
 
 import (
 	"context"
+	"encoding/json"
 	"go-alcochange-dtx-ga-ga/go-alcochange-dtx-ga/dbcon/mssqlcon"
 	"go-alcochange-dtx-ga-ga/go-alcochange-dtx-ga/internals/adapter/googleAnalyticsAdapter"
 	"go-alcochange-dtx-ga-ga/go-alcochange-dtx-ga/internals/daos"
@@ -32,6 +33,9 @@ func (ga *GoogleAnalytics) InsertGoogleAnalytics(date string, ctx context.Contex
 		ga.l.Error("InsertGoogleAnalytics Error - ", err)
 		return nil, err
 	}
+
+	b, _ := json.Marshal(resp)
+	ga.l.Debug("google analytics", string(b))
 
 	errG := ga.googleAnalytics.InsertGoogleAnalyticsData(resp)
 	if errG != nil {

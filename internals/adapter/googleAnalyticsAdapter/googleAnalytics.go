@@ -37,7 +37,8 @@ func (ga GoogleAnalyticsDtx) GetGoogleAnalytics(date string, ctx context.Context
 	}
 	defer client.Close()
 
-	getGoogleAnalyticsQuery := fmt.Sprintf("SELECT * FROM alcochange-dtx-dev.analytics_269133399.events_%v", date)
+	//getGoogleAnalyticsQuery := fmt.Sprintf("SELECT * FROM alcochange-dtx-dev.analytics_269133399.events_%v", date)
+	getGoogleAnalyticsQuery := "SELECT * FROM `alcochange-dtx-dev.analytics_269133399.events_20210416` order by event_timestamp ASC limit 1 offset 1"
 
 	q := client.Query(getGoogleAnalyticsQuery)
 
@@ -62,6 +63,7 @@ func (ga GoogleAnalyticsDtx) GetGoogleAnalytics(date string, ctx context.Context
 	}
 
 	it, err := job.Read(ctx)
+
 	for {
 		var row dtos.GoogleAnalytics
 		err := it.Next(&row)
@@ -72,6 +74,8 @@ func (ga GoogleAnalyticsDtx) GetGoogleAnalytics(date string, ctx context.Context
 			ga.l.Error("Error in fetching data ", err.Error())
 			return nil, fmt.Errorf("error in fetching data: %v", err)
 		}
+
+		ga.l.Debug("row.EventDate", row.EventName)
 
 		googleAnalyticsIns = append(googleAnalyticsIns, row)
 
