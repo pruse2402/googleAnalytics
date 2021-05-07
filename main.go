@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"go-alcochange-dtx-ga-ga/go-alcochange-dtx-ga/conf"
 	"go-alcochange-dtx-ga-ga/go-alcochange-dtx-ga/dbcon/mssqlcon"
+	"go-alcochange-dtx-ga-ga/go-alcochange-dtx-ga/jobs"
 	"go-alcochange-dtx-ga-ga/go-alcochange-dtx-ga/routes"
 	"log"
 	"net/http"
@@ -102,6 +103,8 @@ func main() {
 		close(quit)
 		close(done)
 	}()
+
+	jobs.ScheduleCronGoogleAnalytics()
 
 	log.Printf("Listening on: %d", conf.Cfg.PORT)
 	if err := server.ListenAndServe(); err != http.ErrServerClosed {
