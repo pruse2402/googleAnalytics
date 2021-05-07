@@ -74,6 +74,7 @@ func (ga GoogleAnalyticsDtx) GetGoogleAnalytics(date string, ctx context.Context
 			ga.l.Error("Error in fetching data ", err.Error())
 			return nil, fmt.Errorf("error in fetching data: %v", err)
 		}
+		//ga.l.Debug("EventDate ###########", row.EventDate)
 		googleAnalyticsIns = append(googleAnalyticsIns, row)
 
 	}

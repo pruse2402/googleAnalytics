@@ -143,6 +143,7 @@ func MSSqlConnClose() {
 func GoogleAnalyticsTable(db *sql.DB) {
 	googleAnalytics, err := db.Prepare(`CREATE TABLE IF NOT EXISTS
  		google_analytics (ga_id int unsigned NOT NULL AUTO_INCREMENT,
+		event_date_ref_str varchar(25),
 		event_date varchar(100),
 		event_timestamp BIGINT,
 		event_name varchar(255),

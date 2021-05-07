@@ -10,6 +10,7 @@ import (
 
 func GoogleAnalytics(router *httprouter.Router) {
 	router.POST("/saveGoogleAnalytics", SaveGoogleAnalytics)
+	router.DELETE("/saveGoogleAnalytics", DeleteGARecords)
 }
 
 func SaveGoogleAnalytics(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
@@ -21,6 +22,23 @@ func SaveGoogleAnalytics(w http.ResponseWriter, r *http.Request, _ httprouter.Pa
 	requestDate := keys.Get("date")
 	g := googleAnalyticsService.New(rd.l, rd.dbConnMSSQL)
 	res, err := g.InsertGoogleAnalytics(requestDate, ctx)
+	if err != nil {
+		writeJSONMessage(err.Error(), ERR_MSG, http.StatusBadRequest, rd)
+		return
+	}
+
+	writeJSONStruct(res, http.StatusOK, rd)
+}
+
+func DeleteGARecords(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+
+	rd := logAndGetContext(w, r)
+	ctx := context.Background()
+
+	keys := r.URL.Query()
+	requestDate := keys.Get("date")
+	g := googleAnalyticsService.New(rd.l, rd.dbConnMSSQL)
+	res, err := g.DeleteGARecords(requestDate, ctx)
 	if err != nil {
 		writeJSONMessage(err.Error(), ERR_MSG, http.StatusBadRequest, rd)
 		return

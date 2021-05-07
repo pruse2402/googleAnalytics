@@ -2,151 +2,151 @@ package dtos
 
 import "cloud.google.com/go/bigquery"
 
-type GoogleAnalytics struct {
-	EventDate                  bigquery.NullString  `bigquery:"event_date,nullable"`
-	EventTimestamp             bigquery.NullInt64   `bigquery:"event_timestamp,nullable"`
-	EventName                  bigquery.NullString  `bigquery:"event_name,nullable"`
-	EventParams                []EventParams        `bigquery:"event_params,nullable"`
-	EventPreviousTimestamp     bigquery.NullInt64   `bigquery:"event_previous_timestamp,nullable"`
-	EventValueInUsd            bigquery.NullFloat64 `bigquery:"event_value_in_usd,nullable"`
-	EventBundleSequenceID      bigquery.NullInt64   `bigquery:"event_bundle_sequence_id,nullable"`
-	EventServerTimestampOffset bigquery.NullInt64   `bigquery:"event_server_timestamp_offset,nullable"`
-	UserID                     bigquery.NullString  `bigquery:"user_id,nullable"`
-	UserPseudoID               bigquery.NullString  `bigquery:"user_pseudo_id,nullable"`
-	UserProperties             []UserProperties     `bigquery:"user_properties,nullable"`
-	UserFirstTouchTimestamp    bigquery.NullInt64   `bigquery:"user_first_touch_timestamp,nullable"`
-	UserLtv                    *UserLtv             `bigquery:"user_ltv,nullable"`
-	Device                     *Device              `bigquery:"device,nullable"`
-	Geo                        *Geo                 `bigquery:"geo,nullable"`
-	AppInfo                    *AppInfo             `bigquery:"app_info,nullable"`
-	TrafficSource              *TrafficSource       `bigquery:"traffic_source,nullable"`
-	StreamID                   bigquery.NullString  `bigquery:"stream_id,nullable"`
-	Platform                   bigquery.NullString  `bigquery:"platform,nullable"`
-	EventDimensions            *EventDimensions     `bigquery:"event_dimensions,nullable"`
-	Ecommerce                  *Ecommerce           `bigquery:"ecommerce,nullable"`
-	Items                      []Items              `bigquery:"items,nullable"`
+type GA_GoogleAnalytics struct {
+	EventDate                  string              `json:"EventDate,nullable"`
+	EventTimestamp             int64               `json:"EventTimestamp,nullable"`
+	EventName                  string              `json:"EventName,nullable"`
+	EventParams                *[]GA_EventParams   `json:"EventParams,nullable"`
+	EventPreviousTimestamp     int64               `json:"EventPreviousTimestamp,nullable"`
+	EventValueInUsd            float64             `json:"EventValueInUsd,nullable"`
+	EventBundleSequenceID      int64               `json:"EventBundleSequenceID,nullable"`
+	EventServerTimestampOffset int64               `json:"EventServerTimestampOffset,nullable"`
+	UserID                     string              `json:"UserID,nullable"`
+	UserPseudoID               string              `json:"UserPseudoID,nullable"`
+	UserProperties             []GA_UserProperties `json:"UserProperties,nullable"`
+	UserFirstTouchTimestamp    int64               `json:"UserFirstTouchTimestamp,nullable"`
+	UserLtv                    *GA_UserLtv         `json:"UserLtv,nullable"`
+	Device                     *GA_Device          `json:"Device,nullable"`
+	Geo                        *GA_Geo             `json:"Geo,nullable"`
+	AppInfo                    *GA_AppInfo         `json:"AppInfo,nullable"`
+	TrafficSource              *GA_TrafficSource   `json:"TrafficSource,nullable"`
+	StreamID                   string              `json:"StreamID,nullable"`
+	Platform                   string              `json:"Platform,nullable"`
+	EventDimensions            *GA_EventDimensions `json:"EventDimensions,nullable"`
+	Ecommerce                  *GA_Ecommerce       `json:"Ecommerce,nullable"`
+	Items                      []GA_Items          `json:"Items,nullable"`
 }
 
-type Ecommerce struct {
-	TotalItemQuantity    bigquery.NullInt64   `bigquery:"total_item_quantity,nullable"`
-	PurchaseRevenueInUsd bigquery.NullFloat64 `bigquery:"purchase_revenue_in_usd,nullable"`
-	PurchaseRevenue      bigquery.NullFloat64 `bigquery:"purchase_revenue,nullable"`
-	RefundValueInUsd     bigquery.NullFloat64 `bigquery:"refund_value_in_usd,nullable"`
-	RefundValue          bigquery.NullFloat64 `bigquery:"refund_value,nullable"`
-	ShippingValueInUsd   bigquery.NullFloat64 `bigquery:"shipping_value_in_usd,nullable"`
-	ShippingValue        bigquery.NullFloat64 `bigquery:"shipping_value,nullable"`
-	TaxValueInUsd        bigquery.NullFloat64 `bigquery:"tax_value_in_usd,nullable"`
-	TaxValue             bigquery.NullFloat64 `bigquery:"tax_value,nullable"`
-	UniqueItems          bigquery.NullInt64   `bigquery:"unique_items,nullable"`
-	TransactionID        bigquery.NullString  `bigquery:"transaction_id,nullable"`
+type GA_Ecommerce struct {
+	TotalItemQuantity    int64   `json:"TotalItemQuantity,nullable"`
+	PurchaseRevenueInUsd float64 `json:"PurchaseRevenueInUsd,nullable"`
+	PurchaseRevenue      float64 `json:"PurchaseRevenue,nullable"`
+	RefundValueInUsd     float64 `json:"RefundValueInUsd,nullable"`
+	RefundValue          float64 `json:"RefundValue,nullable"`
+	ShippingValueInUsd   float64 `json:"ShippingValueInUsd,nullable"`
+	ShippingValue        float64 `json:"ShippingValue,nullable"`
+	TaxValueInUsd        float64 `json:"TaxValueInUsd,nullable"`
+	TaxValue             float64 `json:"TaxValue,nullable"`
+	UniqueItems          int64   `json:"UniqueItems,nullable"`
+	TransactionID        string  `json:"TransactionID,nullable"`
 }
 
-type EventDimensions struct {
-	Hostname bigquery.NullString `bigquery:"hostname,nullable"`
+type GA_EventDimensions struct {
+	Hostname string `json:"Hostname,nullable"`
 }
 
-type EventParams struct {
-	Key   bigquery.NullString `bigquery:"key,nullable"`
-	Value Value               `bigquery:"value,nullable"`
+type GA_EventParams struct {
+	Key   string   `json:"Key,nullable"`
+	Value GA_Value `json:"Value,nullable"`
 }
 
-type Value struct {
-	StringValue bigquery.NullString  `bigquery:"string_value,nullable"`
-	IntValue    bigquery.NullInt64   `bigquery:"int_value,nullable"`
-	FloatValue  bigquery.NullFloat64 `bigquery:"float_value,nullable"`
-	DoubleValue bigquery.NullFloat64 `bigquery:"double_value,nullable"`
+type GA_Value struct {
+	StringValue string  `json:"StringValue,nullable"`
+	IntValue    int64   `json:"IntValue,nullable"`
+	FloatValue  float32 `json:"FloatValue,nullable"`
+	DoubleValue float32 `json:"DoubleValue,nullable"`
 }
 
-type UserProperties struct {
-	Key   bigquery.NullString `bigquery:"key,nullable"`
-	Value UserPropertiesValue `bigquery:"value,nullable"`
+type GA_UserProperties struct {
+	Key   string                 `json:"Key,nullable"`
+	Value GA_UserPropertiesValue `json:"Value,nullable"`
 }
 
-type UserPropertiesValue struct {
-	StringValue        bigquery.NullString  `bigquery:"string_value,nullable"`
-	IntValue           bigquery.NullInt64   `bigquery:"int_value,nullable"`
-	FloatValue         bigquery.NullFloat64 `bigquery:"float_value,nullable"`
-	DoubleValue        bigquery.NullFloat64 `bigquery:"double_value,nullable"`
-	SetTimestampMicros bigquery.NullInt64   `bigquery:"set_timestamp_micros,nullable"`
+type GA_UserPropertiesValue struct {
+	StringValue        string  `json:"StringValue,nullable"`
+	IntValue           int64   `json:"IntValue,nullable"`
+	FloatValue         float64 `json:"FloatValue,nullable"`
+	DoubleValue        float64 `json:"DoubleValue,nullable"`
+	SetTimestampMicros int64   `json:"SetTimestampMicros,nullable"`
 }
 
-type UserLtv struct {
-	Revenue  bigquery.NullFloat64 `bigquery:"revenue,nullable"`
-	Currency bigquery.NullString  `bigquery:"currency,nullable"`
+type GA_UserLtv struct {
+	Revenue  bigquery.NullFloat64 `json:"Revenue,nullable"`
+	Currency string               `json:"Currency,nullable"`
 }
 
-type Device struct {
-	Category               bigquery.NullString `bigquery:"category,nullable"`
-	MobileBrandName        bigquery.NullString `bigquery:"mobile_brand_name,nullable"`
-	MobileModelName        bigquery.NullString `bigquery:"mobile_model_name,nullable"`
-	MobileMarketingName    bigquery.NullString `bigquery:"mobile_marketing_name,nullable"`
-	MobileOsHardwareModel  bigquery.NullString `bigquery:"mobile_os_hardware_model,nullable"`
-	OperatingSystem        bigquery.NullString `bigquery:"operating_system,nullable"`
-	OperatingSystemVersion bigquery.NullString `bigquery:"operating_system_version,nullable"`
-	VendorID               bigquery.NullString `bigquery:"vendor_id,nullable"`
-	AdvertisingID          bigquery.NullString `bigquery:"advertising_id,nullable"`
-	Language               bigquery.NullString `bigquery:"language,nullable"`
-	IsLimitedAdTracking    bigquery.NullString `bigquery:"is_limited_ad_tracking,nullable"`
-	TimeZoneOffsetSeconds  bigquery.NullInt64  `bigquery:"time_zone_offset_seconds,nullable"`
-	Browser                bigquery.NullString `bigquery:"browser,nullable"`
-	BrowserVersion         bigquery.NullString `bigquery:"browser_version,nullable"`
-	WebInfo                *WebInfo            `bigquery:"web_info,nullable"`
+type GA_Device struct {
+	Category               string      `json:"Category,nullable"`
+	MobileBrandName        string      `json:"MobileBrandName,nullable"`
+	MobileModelName        string      `json:"MobileModelName,nullable"`
+	MobileMarketingName    string      `json:"MobileMarketingName,nullable"`
+	MobileOsHardwareModel  string      `json:"MobileOsHardwareModel,nullable"`
+	OperatingSystem        string      `json:"OperatingSystem,nullable"`
+	OperatingSystemVersion string      `json:"OperatingSystemVersion,nullable"`
+	VendorID               string      `json:"VendorID,nullable"`
+	AdvertisingID          string      `json:"AdvertisingID,nullable"`
+	Language               string      `json:"Language,nullable"`
+	IsLimitedAdTracking    string      `json:"IsLimitedAdTracking,nullable"`
+	TimeZoneOffsetSeconds  int64       `json:"TimeZoneOffsetSeconds,nullable"`
+	Browser                string      `json:"Browser,nullable"`
+	BrowserVersion         string      `json:"BrowserVersion,nullable"`
+	WebInfo                *GA_WebInfo `json:"WebInfo,nullable"`
 }
 
-type WebInfo struct {
-	Browser        bigquery.NullString `bigquery:"browser,nullable"`
-	BrowserVersion bigquery.NullString `bigquery:"browser_version,nullable"`
-	Hostname       bigquery.NullString `bigquery:"hostname,nullable"`
+type GA_WebInfo struct {
+	Browser        string `json:"Browser,nullable"`
+	BrowserVersion string `json:"BrowserVersion,nullable"`
+	Hostname       string `json:"Hostname,nullable"`
 }
 
-type Geo struct {
-	Continent    bigquery.NullString `bigquery:"continent,nullable"`
-	Country      bigquery.NullString `bigquery:"country,nullable"`
-	Region       bigquery.NullString `bigquery:"region,nullable"`
-	City         bigquery.NullString `bigquery:"city,nullable"`
-	SubContinent bigquery.NullString `bigquery:"sub_continent,nullable"`
-	Metro        bigquery.NullString `bigquery:"metro,nullable"`
+type GA_Geo struct {
+	Continent    string `json:"Continent,nullable"`
+	Country      string `json:"Country,nullable"`
+	Region       string `json:"Region,nullable"`
+	City         string `json:"City,nullable"`
+	SubContinent string `json:"SubContinent,nullable"`
+	Metro        string `json:"Metro,nullable"`
 }
 
-type AppInfo struct {
-	ID            bigquery.NullString `bigquery:"id,nullable"`
-	Version       bigquery.NullString `bigquery:"version,nullable"`
-	InstallStore  bigquery.NullString `bigquery:"install_store,nullable"`
-	FirebaseAppId bigquery.NullString `bigquery:"firebase_app_id,nullable"`
-	InstallSource bigquery.NullString `bigquery:"install_source,nullable"`
+type GA_AppInfo struct {
+	ID            string `json:"ID,nullable"`
+	Version       string `json:"Version,nullable"`
+	InstallStore  string `json:"InstallStore,nullable"`
+	FirebaseAppId string `json:"FirebaseAppId,nullable"`
+	InstallSource string `json:"InstallSource,nullable"`
 }
 
-type TrafficSource struct {
-	Name   bigquery.NullString `bigquery:"name,nullable"`
-	Medium bigquery.NullString `bigquery:"medium,nullable"`
-	Source bigquery.NullString `bigquery:"source,nullable"`
+type GA_TrafficSource struct {
+	Name   string `json:"Name,nullable"`
+	Medium string `json:"Medium,nullable"`
+	Source string `json:"Source,nullable"`
 }
 
-type Items struct {
-	ItemID           bigquery.NullString  `bigquery:"item_id,nullable"`
-	ItemName         bigquery.NullString  `bigquery:"item_name,nullable"`
-	ItemBrand        bigquery.NullString  `bigquery:"item_brand,nullable"`
-	ItemVariant      bigquery.NullString  `bigquery:"item_variant,nullable"`
-	ItemCategory     bigquery.NullString  `bigquery:"item_category,nullable"`
-	ItemCategory2    bigquery.NullString  `bigquery:"item_category2,nullable"`
-	ItemCategory3    bigquery.NullString  `bigquery:"item_category3,nullable"`
-	ItemCategory4    bigquery.NullString  `bigquery:"item_category4,nullable"`
-	ItemCategory5    bigquery.NullString  `bigquery:"item_category5,nullable"`
-	PriceInUsd       bigquery.NullFloat64 `bigquery:"price_in_usd,nullable"`
-	Price            bigquery.NullFloat64 `bigquery:"price,nullable"`
-	Quantity         bigquery.NullInt64   `bigquery:"quantity,nullable"`
-	ItemRevenueInUsd bigquery.NullFloat64 `bigquery:"item_revenue_in_usd,nullable"`
-	ItemRevenue      bigquery.NullFloat64 `bigquery:"item_revenue,nullable"`
-	ItemRefundInUsd  bigquery.NullFloat64 `bigquery:"item_refund_in_usd,nullable"`
-	ItemRefund       bigquery.NullFloat64 `bigquery:"item_refund,nullable"`
-	Coupon           bigquery.NullString  `bigquery:"coupon,nullable"`
-	Affiliation      bigquery.NullString  `bigquery:"affiliation,nullable"`
-	LocationId       bigquery.NullString  `bigquery:"location_id,nullable"`
-	ItemListID       bigquery.NullString  `bigquery:"item_list_id,nullable"`
-	ItemListName     bigquery.NullString  `bigquery:"item_list_name,nullable"`
-	ItemListIndex    bigquery.NullString  `bigquery:"item_list_index,nullable"`
-	PromotionID      bigquery.NullString  `bigquery:"promotion_id,nullable"`
-	PromotionName    bigquery.NullString  `bigquery:"promotion_name,nullable"`
-	CreativeName     bigquery.NullString  `bigquery:"creative_name,nullable"`
-	CreativeSlot     bigquery.NullString  `bigquery:"creative_slot,nullable"`
+type GA_Items struct {
+	ItemID           string  `json:"ItemID,nullable"`
+	ItemName         string  `json:"ItemName,nullable"`
+	ItemBrand        string  `json:"ItemBrand,nullable"`
+	ItemVariant      string  `json:"ItemVariant,nullable"`
+	ItemCategory     string  `json:"ItemCategory,nullable"`
+	ItemCategory2    string  `json:"ItemCategory2,nullable"`
+	ItemCategory3    string  `json:"ItemCategory3,nullable"`
+	ItemCategory4    string  `json:"ItemCategory4,nullable"`
+	ItemCategory5    string  `json:"ItemCategory5,nullable"`
+	PriceInUsd       float64 `json:"PriceInUsd,nullable"`
+	Price            float64 `json:"Price,nullable"`
+	Quantity         int64   `json:"Quantity,nullable"`
+	ItemRevenueInUsd float64 `json:"ItemRevenueInUsd,nullable"`
+	ItemRevenue      float64 `json:"ItemRevenue,nullable"`
+	ItemRefundInUsd  float64 `json:"ItemRefundInUsd,nullable"`
+	ItemRefund       float64 `json:"ItemRefund,nullable"`
+	Coupon           string  `json:"Coupon,nullable"`
+	Affiliation      string  `json:"Affiliation,nullable"`
+	LocationId       string  `json:"LocationId,nullable"`
+	ItemListID       string  `json:"ItemListID,nullable"`
+	ItemListName     string  `json:"ItemListName,nullable"`
+	ItemListIndex    string  `json:"ItemListIndex,nullable"`
+	PromotionID      string  `json:"PromotionID,nullable"`
+	PromotionName    string  `json:"PromotionName,nullable"`
+	CreativeName     string  `json:"CreativeName,nullable"`
+	CreativeSlot     string  `json:"CreativeSlot,nullable"`
 }
