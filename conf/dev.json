@@ -10,14 +10,11 @@
     "delims_r"                    : "}",
   
     "http_address"                : "",
-  
-    "db_name"                     : "cyberliver_platform_ga",
-    "username"                    : "postgres",
-    "password"                    : "postgres",
     "uri"                         : null,
+    
     "db_address"                  : "localhost:5432",
     "max_connection_pool_size"    : 15,
-    "mssql_db_url"                : "root:cbAdmin2018@tcp(localhost:3306)/cyberliver_platform?charset=utf8",
+    "mssql_db_url"                : "root:cbAdmin2018@tcp(localhost:3306)/acdtx_ga_uk?charset=utf8",
 
     "project_id"                  : "alcochange-dtx-dev"
   }

@@ -48,6 +48,7 @@ func RouterConfig() http.Handler {
 	//indexHandlers := alice.New(recoverHandler)
 
 	GoogleAnalytics(router)
+	////root:cbAdmin2018@tcp(localhost:3306)/cyberliver_platform?charset=utf8
 
 	router.Handler("GET", "/swagger", httpSwagger.WrapHandler)
 	router.Handler("GET", "/swagger/:one", httpSwagger.WrapHandler)
