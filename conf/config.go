@@ -25,14 +25,13 @@ type Config struct {
 	PORT    int    `json:"port"`
 
 	// DATABASE CONFIG
-	DB_TYPE                  string `json:"type"`
-	DB_NAME                  string `json:"db_name"`
-	DB_USERNAME              string `json:"username"`
-	DB_PASSWORD              string `json:"password"`
-	DB_ADDRESS               string `json:"db_address"`
-	Max_Connection_Pool_Size int    `json:"max_connection_pool_size"`
-	MSSQL_URL                string `json:"mssql_db_url"`
-
+	DB_TYPE                    string `json:"type"`
+	DB_NAME                    string `json:"db_name"`
+	DB_USERNAME                string `json:"username"`
+	DB_PASSWORD                string `json:"password"`
+	DB_ADDRESS                 string `json:"db_address"`
+	Max_Connection_Pool_Size   int    `json:"max_connection_pool_size"`
+	MSSQL_URL_GOOGLE_ANALYTICS string `json:"mssql_db_url_ga"`
 	// GOOGLE ANALYTICS
 	PROJECT_ID string `json:"project_id"`
 }

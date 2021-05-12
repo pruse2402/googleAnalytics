@@ -58,7 +58,7 @@ func main() {
 
 	//mssqlurl := "3.8.31.220:cbAdmin2018@/cyberliver_platform?parseTime=true"
 	//MsSqlurl := "root:cbAdmin2018@tcp(localhost:3306)/cyberliver_platform?charset=utf8"
-	mssqlcon.MSSqlInit(conf.Cfg.MSSQL_URL)
+	mssqlcon.MSSqlInit(conf.Cfg.MSSQL_URL_GOOGLE_ANALYTICS)
 	log.Println("-----------------------------------------------------------")
 
 	router := routes.RouterConfig()
