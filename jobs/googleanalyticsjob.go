@@ -16,7 +16,7 @@ import (
 func ScheduleCronGoogleAnalytics() {
 	fmt.Println("Init", "ScheduleCronGoogleAnalytics")
 	c := cron.New()
-	cronExp1 := fmt.Sprintf("0 0 01 * * ?")
+	cronExp1 := fmt.Sprintf("0 0 23 * * ?")
 	c.AddFunc(cronExp1, func() {
 		ctx := context.Background()
 		previousDay := time.Now().Add(-24 * time.Hour)
